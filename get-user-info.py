@@ -33,6 +33,6 @@ user_info = {
 "user name": response['display_name'],
 "email": response['email']
 }
-print(user_info)
+
 user_df = pd.DataFrame([user_info]) 
 print(user_df)
