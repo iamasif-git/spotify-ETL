@@ -1,4 +1,7 @@
 from email import header
+from logging import exception, raiseExceptions
+from re import L
+from tkinter import E
 from wsgiref import headers
 import requests
 import sqlalchemy
@@ -10,7 +13,7 @@ import sqlite3
 
 DATABASE_CONNECTION = 'sqlite://my_user_info.db'
 USER_ID = "MD ASIF"
-TOKEN = "BQDnoJNP_m6ClW2JX24dnivJCfOlqC5HEpUX7ReKK7FeAk3uMiuaAXPJ3ulgIOI-CqAdae4ViPEVMju38eBU8p4xpKWsNvSJCfKQ60txAmrqr_wXa32jq9HZ5yGpX2Iojy9kn_-imgJAiWUIjp7bIDEbtOj_IH7c-6emnd8hCHrIDhOnaz7iWHziRFhBcj_4UaYvxmdquqg"
+TOKEN = "BQB6FAMCzRfsxqTSTppBaHptGGzYx1YT4vsu4Yg81mAhcYrbVDebstWqyhtWkHPwHB_vI4WUpW9w-Z6zejUD2oUTw9pNqcEdju5uHUnbN6zqVp_K5Zplo2qzOXggnuUkUGowmxQN61OpZGh_F4mH-PzTzjOB58_D5a9qa4Tl8Ja8iT8sKRa_rLDpX1LP-KMdKVk"
 
 
 user_header =  {
@@ -27,12 +30,34 @@ response = requests.get("https://api.spotify.com/v1/me?after={time}".format(time
 
 
 response=response.json()
-
+#print(response)
 user_info = {
-"country":response['country'],
 "user name": response['display_name'],
 "email": response['email']
 }
 
-user_df = pd.DataFrame([user_info]) 
+user_df = pd.DataFrame([user_info])
+
+#Data validation
+def dataframeChecks(user_df:pd.DataFrame):
+    if (user_df.empty()):
+        print("No user found")
+        return False
+
+    if(user_df['email'].is_unique()):
+        pass
+    else:
+        raise Exception ("Primary key check violated") 
+
+    if (user_df.isnull()):
+        raise Exception ("Null Value Found")
+
+if(dataframeChecks(user_df)):
+    print("Data valid. Proceed with Loading")
+
+    
+
+
+
+
 print(user_df)
