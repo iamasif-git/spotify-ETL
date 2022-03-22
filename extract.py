@@ -7,7 +7,7 @@ import sqlalchemy
 import json
 
 
-DATABASE_CONNECTION = "sqlite://mysongs.db"
+DATABASE_CONNECTION = "sqlite:///mysongs.db"
 TOKEN = "BQBuYvLFiNERbm6tVfpTIYAV2ZXJdVcH6o1GiMypCuq1orezQncp3ypI6ra9sYqpYR-n4OrMw-KCV0mUXsZAdYT8auvr6O9ll7job3IEaoEQBFxnVce23Jblx0w9H8ZR4ThrGnUEahfwwZSAOWnTkVnEEJTp8iUoqZz6iNJx5sN0AT6u3qnHFiEuUj2PV6QTlM9WkgepRi5SSQ"
 USER_ID = "MD ASIF"
 
@@ -44,9 +44,9 @@ def songs_extract():
         time_stamp.append(item['played_at'][0:10])
 
     data = {
-        "song name":song_name,
-        "artist name":artist_name,
-        "played at":played_at,
+        "song_name":song_name,
+        "artist_name":artist_name,
+        "played_at":played_at,
         "timestamp": time_stamp
     }
 

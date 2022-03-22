@@ -11,7 +11,7 @@ def data_validation(df = data_df) -> bool:
         return(False)
 
     #CHECKING FOR ALL UNIQUE VALUES
-    if(pd.Series(df['played at']).is_unique):
+    if(pd.Series(df['played_at']).is_unique):
         pass
     else:
         raise Exception("Primary Key Constraint Error")
@@ -28,11 +28,10 @@ def data_validation(df = data_df) -> bool:
     for timestamp in timestamps:
         if(datetime.datetime.strptime(timestamp,"%Y-%m-%d") != yesterday):
             raise Exception("Atleast one song not from yesterday")
-
+    
+    return(True)
 
 def send_to_load():
     if(data_validation(data_df)):
         return(data_df)
 
-if(data_validation()):
-    print("Data Correct. Proceed to load")
