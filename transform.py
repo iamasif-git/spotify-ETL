@@ -4,7 +4,7 @@ from extract import *
 data_df = songs_extract()
 
 #PERFORMING VALIDATIONS
-def data_validation(df) -> bool:
+def data_validation(df = data_df) -> bool:
     #CHECKING IF DATAFRAME IS EMPTY
     if(df.empty):
         print("No Songs Played")
@@ -30,5 +30,9 @@ def data_validation(df) -> bool:
             raise Exception("Atleast one song not from yesterday")
 
 
-if(data_validation(data_df)):
-    print("Data Correct, Proceed to Load")
+def send_to_load():
+    if(data_validation(data_df)):
+        return(data_df)
+
+if(data_validation()):
+    print("Data Correct. Proceed to load")
